@@ -25,13 +25,6 @@ MongoClient.connect(uri, function(err, database) {
      });        
 });
 
-/*db.open(function(err, db) {
-        db.collection('forecasts', {strict:true}, function(err, collection) {
-     });
-        db.collection('player_forecast', {strict:true}, function(err, collection) {
-     });
-});*/
-
 exports.startUp = function(req, res)
 {
     res.sendfile("index.html");
@@ -105,48 +98,42 @@ var externalApiForecast = [];
 
 
 requestRecursiblyRounds();
-var loopCancel = false;
+
 function requestRecursiblyRounds()
-{
-   loopCancel = false;
-   for(var i=1;i<20;i++){
-        requestFromApi(i.toString());
-        if (loopCancel)
-            break;
-    }
-}
-
-function cancelLoop()
-{
-    loopCancel = true;
-}
-
-function requestFromApi(i)
-{
-    var evento, ok = true;
-      http.get(apiUrlRound + "round/" + i.toString(), function(response){
-            response.setEncoding('utf8');
-            response.on('data', function(data){
+{  
+    var count = 0, oks = true;
+    for(var i=1;i<20;i++){
+      
+    var evento;
+    http.get(apiUrlRound + "round/" + i.toString(), function(response){
+        response.setEncoding('utf8');
+        response.on('data', function(data){
+                count += 1;
                 try{
                     evento = JSON.parse(data);
                 }
                 catch (e) {
-                    ok = false;
-                    externalApiForecast = [];                   
-                    cancelLoop();
-                    requestRecursiblyRounds();
+                    oks = false;
+                    externalApiForecast = [];
                 }
             });
             response.on('end', function(){
-                if (ok){
-                    sepparateGames(evento.games);
-                    if (i == 19){
+                if (oks){
+                    sepparateGames(evento.games);                    
+                    if (count == 19){
+                        console.log("final");
                         initializeDb();
-                        cancelLoop();
+                    }
+                }
+                else{
+                    if (count == 19){
+                        console.log("fallo");
+                        setTimeout(function(){requestRecursiblyRounds();},5000);
                     }
                 }
             });
         });
+    }
 }
 
 var imagesPath = "https://footballdb.herokuapp.com/assets/flags/24x24/";
