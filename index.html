@@ -34,6 +34,7 @@
 
       function getFriends() {
         FB.api('/me/friends', function(response) {
+          cosnole.log(response);
           if (response && response.data && response.data.length > 0)
             getAllOtherForecasts(response.data);
         });
@@ -57,6 +58,7 @@
 
       function getAllOtherForecasts(response)
       {
+        console.log(response);
         $.ajax({
           cache: false,
           type: 'GET',
@@ -269,7 +271,7 @@ function limitCharacters(elem, number)
     </div>
 
     <div class="ecuestasContainer">      
-    <div class="encuestas">      
+    <div class="encuestas"> 
       <script type="text/javascript" src="http://votaciones.miarroba.es/ver.php?id=280700"></script>
       <script type="text/javascript" src="http://votaciones.miarroba.es/ver.php?id=306380"></script>
       <script type="text/javascript" src="http://votaciones.miarroba.es/ver.php?id=306381"></script>
