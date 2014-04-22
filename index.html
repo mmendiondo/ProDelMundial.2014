@@ -34,8 +34,6 @@
 
       function getFriends() {
         FB.api('/me/friends', function(response) {
-          console.log(response);
-          if (response && response.data && response.data.length > 0)
             getAllOtherForecasts(response.data);
         });
       }
