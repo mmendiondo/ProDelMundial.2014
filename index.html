@@ -88,14 +88,14 @@
 
             $("<img>").appendTo(divo)
             .addClass("imgUser")
-            .prop("src", "https://graph.facebook.com/"+friends[friend].id+"/picture?type=small" );
+            .prop("src", "https://graph.facebook.com/"+friends[friend].id+"/picture?type=normal" );
           }
           else
           {
             var divo = $("<div>").addClass("notFriend").appendTo($("#notFriends"));
             $("<div>").appendTo(divo)
             .addClass("groupTit")
-            .text("desconocido");
+            .text("Desc. Gomez");
 
             $("<div>").appendTo(divo)
             .addClass("scoreFriend")
@@ -103,7 +103,7 @@
 
             $("<img>").appendTo(divo)
             .addClass("imgUser")
-            .prop("src", "https://graph.facebook.com/"+forecast.forecast_id+"/picture?type=small" );
+            .prop("src", "https://graph.facebook.com/"+forecast.forecast_id+"/picture?type=normal" );
           }
 
         }
