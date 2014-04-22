@@ -1,27 +1,36 @@
-var mongo = require('mongodb');
+var connect = require('connect'),
+  mongodb = require('mongodb');
+var MongoClient = require('mongodb').MongoClient;
+
 var http = require('https') ;
 
-var Server = mongo.Server,
-    Db = mongo.Db,
-    BSON = mongo.BSONPure;
+//var Server = mongo.Server,
+//    Db = mongo.Db;
  
+//var server = new Server('localhost', 27017, {auto_reconnect: true});
+//db = new Db('forecastdb', server, {w:1});
+var db;
+// Connect to a mongo database via URI
+// With the MongoLab addon the MONGOLAB_URI config variable is added to your
+// Heroku environment.  It can be accessed as process.env.MONGOLAB_URI
 
-  //mongodb://heroku_app24286766:mc4kflpqnb8dd20di1052fopup@ds053838.mongolab.com:53838/heroku_app24286766
+var uri = (process.env.MONGOLAB_URI != undefined)?
+    process.env.MONGOLAB_URI : "mongodb://localhost:27017/forecastdb";
 
+MongoClient.connect(uri, function(err, database) {
+    db = database;
+    db.collection('forecasts', {strict:true}, function(err, collection) {
+     });
+        db.collection('player_forecast', {strict:true}, function(err, collection) {
+     });        
+});
 
-
-var server = new Server('ds053838.mongolab.com', 53838, {auto_reconnect: true});
-db = new Db('forecastdb', server, {w:1});
-
-db.open(function(err, db) {
+/*db.open(function(err, db) {
         db.collection('forecasts', {strict:true}, function(err, collection) {
      });
         db.collection('player_forecast', {strict:true}, function(err, collection) {
      });
-});
-
-
-
+});*/
 
 exports.startUp = function(req, res)
 {
