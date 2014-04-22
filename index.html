@@ -200,12 +200,13 @@
         
     function appendFriend(forecast, friends)
     {
+         console.log(friends);
+          console.log(forecast);
 
       for(var friend in friends)
       {
-         console.log(friends[friend]);
-          console.log(forecast);
-          
+
+
         if(forecast.forecast_id == friends[friend].id)
         {
 
