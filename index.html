@@ -93,8 +93,9 @@
           else
           {
             var divo = $("<div>").addClass("notFirend").appendTo($("#notFriends"));
-            .addClass("groupTit").
-            text("desconocido");
+            $("<div>").appendTo(divo)
+            .addClass("groupTit")
+            .text("desconocido");
 
             $("<div>").appendTo(divo)
             .addClass("scoreFriend")
