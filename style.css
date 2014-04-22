@@ -123,16 +123,30 @@ div:hover
   height:20px;
 }
 
-.friends
+#notFriends
 {
   width: 100%;
   height: 120px;
 }
 
-#friend
+.notFriend
 {
-   width: 70px;
-  background: #002222;
+  width: 70px;
+  background: #001111;
+  float: left;
+  margin: 2px;
+}
+
+#friends
+{
+  width: 100%;
+  height: 120px;
+}
+
+.friend
+{
+  width: 70px;
+  background: #003333;
   float: left;
   margin: 2px;
 }

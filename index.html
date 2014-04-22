@@ -64,19 +64,18 @@
           url: "/player_forecasts",
           success: function (forecasts) {
             for(var i in forecasts)
+            {
               appendFriend(forecasts[i], response);
+            }
           }
         });
       }
 
       function appendFriend(forecast, friends)
       {
-         console.log(friends);
-          console.log(forecast);
-
-      for(var friend in friends)
-      {
-        if(forecast.forecast_id == friends[friend].id)
+        for(var friend in friends)
+        {
+          if(forecast.forecast_id == friends[friend].id)
           {
            var divo = $("<div>").addClass("friend").appendTo($("#friends"));
             $("<div>").appendTo(divo)
@@ -91,6 +90,21 @@
             .addClass("imgUser")
             .prop("src", "https://graph.facebook.com/"+friends[friend].id+"/picture?type=small" );
           }
+          else
+          {
+            var divo = $("<div>").addClass("notFirend").appendTo($("#notFriends"));
+            .addClass("groupTit").
+            text("desconocido");
+
+            $("<div>").appendTo(divo)
+            .addClass("scoreFriend")
+            .text((forecast.score)? forecasts.score : "0" + " Puntos");
+
+            $("<img>").appendTo(divo)
+            .addClass("imgUser")
+            .prop("src", "https://graph.facebook.com/"+forecast.forecast_id+"/picture?type=small" );
+          }
+
         }
       }
 
@@ -263,8 +277,9 @@ function limitCharacters(elem, number)
     <div id='dashboard'></div>
     <div class="fb-like" data-send="true" data-width="450" data-show-faces="true"></div>
     <div id='world'></div>
-     <div id='save' class="save" >Ir Guardando</div>
+    <div id='save' class="save" >Ir Guardando</div>
     <div id='friends'></div>
+    <div id='notFriends'></div>
     <div class="tagboard">
       <script type="text/javascript" src="http://tagboards.miarroba.es/ver.php?id=217787"></script>
     </div>
