@@ -201,11 +201,12 @@
     function appendFriend(forecast, friends)
     {
 
-      console.log(1);
       for(var friend in friends)
       {
         if(forecast.forecast_id == friends[friend].id)
         {
+          console.log(friends[friend]);
+          console.log(forecast);
            var divo = $("<div>").addClass("friend").appendTo($("#friends"));
           $("<div>").appendTo(divo)
           .addClass("groupTit")
