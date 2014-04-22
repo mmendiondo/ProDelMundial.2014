@@ -90,22 +90,6 @@
             .addClass("imgUser")
             .prop("src", "https://graph.facebook.com/"+friends[friend].id+"/picture?type=normal" );
           }
-          else
-          {
-            var divo = $("<div>").addClass("notFriend").appendTo($("#notFriends"));
-            $("<div>").appendTo(divo)
-            .addClass("groupTit")
-            .text("Desc. Gomez");
-
-            $("<div>").appendTo(divo)
-            .addClass("scoreFriend")
-            .text((forecast.score)? forecasts.score : "0" + " Puntos");
-
-            $("<img>").appendTo(divo)
-            .addClass("imgUser")
-            .prop("src", "https://graph.facebook.com/"+forecast.forecast_id+"/picture?type=normal" );
-          }
-
         }
       }
 
