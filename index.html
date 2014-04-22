@@ -1,0 +1,282 @@
+<!DOCTYPE html>
+<html lang="es">
+  <head>
+    <title>ProDelMundial</title> 
+    <LINK href="/style.css" rel="stylesheet" type="text/css">
+    <script src="/jquerymin.js"></script>
+
+    <script>
+
+    var uid = "1129200740";
+      window.fbAsyncInit = function() {
+        FB.init({
+          appId      : 110528582328864,
+          status     : true,
+          xfbml      : true
+        });
+
+        FB.login(function(response) {
+          if (response && response.authResponse){
+            uid = response.authResponse.userID;
+            getMe();
+            getFriends();
+            getMyForecast(uid);
+          }
+        }, {scope: 'basic_info,user_likes'});
+      };
+
+      (function(d){
+        var js, id = 'facebook-jssdk'; if (d.getElementById(id)) {return;}
+        js = d.createElement('script'); js.id = id; js.async = true;
+        js.src = "//connect.facebook.net/es_LA/all.js";
+        d.getElementsByTagName('head')[0].appendChild(js);
+      }(document));
+
+      function getFriends() {
+        FB.api('/me/friends', function(response) {
+          if (response && response.data && response.data.length > 0)
+            getAllOtherForecasts(response.data);
+        });
+      }
+      
+      function getMe() {
+        FB.api('/me', function(response) {
+          getMyStuff(response);
+        });
+      }
+
+      function getMyStuff(myData)
+      {
+        var divo = $("<div>")
+          .addClass("myData")
+          .addClass("myData" + myData.gender)
+          .appendTo($("#dashboard"));
+          $("<div>").appendTo(divo)
+          .text(myData.first_name);
+      }
+
+      function getAllOtherForecasts(response)
+      {
+        $.ajax({
+          cache: false,
+          type: 'GET',
+          dataType: 'json',
+          data: {},
+          url: "/player_forecasts",
+          success: function (forecasts) {
+            for(var i in forecasts)
+              appendFriend(forecasts[i], response.data);
+          }
+        });
+      }
+
+      var myForecast = [];
+      var myScore = 0;
+      function getMyForecast(uid)
+      {
+        $.ajax({
+          cache: false,
+          type: 'GET',
+          dataType: 'json',
+          data: {},
+          url: "/player_forecast/" + uid.toString(),
+          success: function (response) {           
+            myForecast = response.forecast;
+            myScore = response.score;
+            createGroups();
+          }
+        });
+      }
+      
+      var zonesArray = ["Octavos", 
+          "Cuartos", 
+          "Semifinales", 
+          "Tercer Y Cuarto Puesto", 
+          "Final"];
+      var lettersArray = ["A", "B","C", "D","E", "F","G", "H"];
+      
+      function createGroups()
+      {
+        var j=1;
+        for (;j<14;j++) {
+          var divo = $("<div>").addClass("group")
+          .addClass("collapse")
+          .addClass((j <= 8)? "group" + lettersArray[j-1] : zonesArray[j-9]).appendTo($("#world"));
+          
+          $("<div>").appendTo(divo)
+            .addClass("groupTit")
+            .text((j <= 8)? "Grupo " + lettersArray[j-1] : zonesArray[j-9])
+            .click(function() {
+              $(this).parent().toggleClass("collapse");
+            });
+        }
+        finalizeGroupRetrieving();
+      }
+
+      var zonesArray = ["Octavos", 
+          "Cuartos", 
+          "Semifinales", 
+          "Tercer Y Cuarto Puesto", 
+          "Final"];
+
+    function finalizeGroupRetrieving()
+    {
+      for(var match in myForecast){
+        createGroupAndMatch(myForecast[match]);
+      }
+
+      var divo = $("<div>").addClass("myResult").appendTo($("#dashboard"));
+          $("<div>").appendTo(divo)
+          .text(myScore + " Puntos");
+
+      $(".locker").hide();
+      $(".save").show();
+    }
+
+  function today()
+  {
+    return new Date();
+  }
+
+  function createGroupAndMatch(match){
+    var divo = $(".group" + match.group);
+    divo.removeClass("collapse");
+    $("<div>").appendTo(divo)
+      .addClass("match")
+      .text(match.play_at);
+
+    $("<div>").appendTo(divo)
+      .addClass("team")
+      .text(match.team_name1);
+
+    $("<img>").appendTo(divo)
+      .addClass("img24x24")
+      .prop("src", match.imgTeam1);
+
+    $("<div>").appendTo(divo)
+      .addClass("score")
+      .attr("title", "resultado real: " + ((match.score1)? match.score1 : "Aún no jugaron"))
+      .prop("contentEditable", (new Date(match.play_at) > today()))
+      .text(match.playerScore1)
+      .blur(function()
+        {
+          if(new Date(match.play_at) > today())
+            match.playerScore1 = this.innerText;
+        })
+      .keydown(function( e ) {
+          preventNotNumber(e, match.play_a);        
+        })
+      .keyup(function( e ) {        
+          limitCharacters(this, 2);
+        });
+
+      $("<div>").appendTo(divo)
+        .addClass("score")
+        .attr("title", "resultado real: " + ((match.score2)? match.score2 : "Aún no jugaron"))
+        .prop("contentEditable", (new Date(match.play_at) > today()))
+        .text(match.playerScore2)
+        .blur(function()
+          {
+            if(new Date(match.play_at) > today()) 
+              match.playerScore2 = this.innerText;
+          })
+        .keydown(function( e ) 
+          {
+            preventNotNumber(e, match.play_a);
+          })
+        .keyup(function( e ) {        
+            limitCharacters(this, 2);
+          });
+
+      $("<img>").appendTo(divo)
+        .addClass("img24x24")
+         .prop("src", match.imgTeam2);
+
+      $("<div>").appendTo(divo)
+        .addClass("team")
+        .text(match.team_name2);
+    }
+        
+    function appendFriend(forecast, friends)
+    {
+
+      for(var friend in friends)
+      {
+        if(forecast.forecast_id == friends[friend].id)
+        {
+           var divo = $("<div>").addClass("friend").appendTo($("#friends"));
+          $("<div>").appendTo(divo)
+          .addClass("groupTit")
+          .text(friends[friend].name);
+
+          $("<div>").appendTo(divo)
+          .addClass("scoreFriend")
+          .text((forecast.score)? forecasts.score : "0" + " Puntos");
+
+          $("<img>").appendTo(divo)
+          .addClass("imgUser")
+          .prop("src", "https://graph.facebook.com/"+friends[friend].id+"/picture?type=small" );
+        }
+      }
+    }
+
+    $(document).ready(function(){
+      $(".save").click(function()
+        {
+          $(".locker").show();
+           $.ajax({
+              cache: false,
+              type: 'PUT',
+              dataType: 'json',
+              data: {forecast:myForecast},
+              url: "/player_forecast/" + uid.toString(),
+              complete: function (resp) {
+                $(".locker").hide();
+              }
+            });
+        }
+      );
+    });
+
+
+function preventNotNumber(e)
+{
+   var keyCode = (e.keyCode ? e.keyCode : e.which);
+    if(keyCode > 57)
+      e.preventDefault();
+}
+
+function limitCharacters(elem, number)
+{
+     if(elem.innerText.length > number)
+      elem.innerText = elem.innerText.substring(0, number);
+}
+
+  </script>
+
+  </head>
+	<body>
+
+    <div class="locker">Cargando...XD</div>
+    <div class="title">ProDelMundial</div>
+    <div id='dashboard'></div>
+    <div class="fb-like" data-send="true" data-width="450" data-show-faces="true"></div>
+    <div id='world'></div>
+     <div id='save' class="save" >Ir Guardando</div>
+    <div id='friends'></div>
+    <div class="tagboard">
+      <script type="text/javascript" src="http://tagboards.miarroba.es/ver.php?id=217787"></script>
+    </div>
+
+    <div class="ecuestasContainer">      
+    <div class="encuestas">      
+      <script type="text/javascript" src="http://votaciones.miarroba.es/ver.php?id=280700"></script>
+      <script type="text/javascript" src="http://votaciones.miarroba.es/ver.php?id=306380"></script>
+      <script type="text/javascript" src="http://votaciones.miarroba.es/ver.php?id=306381"></script>
+      <script type="text/javascript" src="http://votaciones.miarroba.es/ver.php?id=306379"></script>
+      <script type="text/javascript" src="http://votaciones.miarroba.es/ver.php?id=306378"></script>
+    </div>
+    </div>
+
+  </body>
+</html>

@@ -1,0 +1,199 @@
+body{
+      font-family:arial;
+      color:#333;
+      font-size:11px;
+      background: #EEE;
+    }
+div
+{
+  border-radius: 4px;
+}
+div:hover
+{
+  border-color:#006C51;
+}
+
+.group, .match, .score, .team, .img24x24{
+      float:left;
+      overflow:hidden;
+    }
+
+.groupTit{
+      background: #455 ;
+      height:20px;
+      line-height:20px;
+      color: #FFF;
+      font-weight: bold;
+      padding-left: 4px;
+    }
+.group{
+      width:243px;
+      border:solid 2px #455 ;
+      margin:1px;
+      -webkit-transition: height 1s; /* For Safari 3.1 to 6.0 */
+      transition: height 1s;
+      height:200px;
+      background: #688 ;
+      color:#FFF;
+
+    }
+.match{
+      width:55px;
+      height:30px;
+      line-height:30px;
+      color:#DDD;
+    }
+.score{
+      width:20px;
+      height:22px;
+      line-height: 20px;
+      margin-top:2px;
+      background:#DDD;
+      border:solid 1px white;
+      text-align: center;
+      margin-right:1px;
+      color: #222;
+    }
+.img24x24
+    {
+      position: relative;
+      top: 2px;
+    }
+.team{
+      width:45px;
+      overflow:hidden;
+      height:30px;
+      line-height:30px;
+      text-align: center;
+    }
+#world
+{  
+  margin:auto;
+  width: 996px;
+  margin-bottom: 10px;
+  cursor:pointer;
+}
+#dashboard, .title
+{
+  font-size: 60px;
+  color:#666;
+  font-weight: bold;
+  text-align: right;
+  margin-right: 150px;
+}
+
+#dashboard
+{
+  height: 80px;
+}
+.title
+{
+  text-align: left;
+}
+.group:nth-child(9),.group:nth-child(10), .group:nth-child(11), .group:nth-child(12), .group:nth-child(13)
+{
+  float: none;
+  width: 990px;
+  margin: auto;
+  text-align: center;
+}
+
+.myDatafemale{color:#DD9988;}
+.myDatamale{color:#222266;}
+
+.myData{float:left;height:100px;}
+.save{
+      width:75px;
+      overflow:hidden;
+      height:30px;
+      line-height:30px;
+      text-align: center;
+      background:orange;
+      margin:auto;
+      cursor:pointer;
+      display: none;
+    }
+.save:hover
+{
+   background:#DDD;
+}
+
+.collapse
+{
+  height:20px;
+}
+
+.friends
+{
+  width: 100%;
+  height: 120px;
+}
+
+#friend
+{
+   width: 70px;
+  background: #002222;
+  float: left;
+  margin: 2px;
+}
+.scoreFriend
+{
+  font-size: 12px;
+  font-weight: bold;
+  color: #FFCC99;
+  padding: 2px 6px;
+}
+.imgUser{
+  margin: auto;
+  padding: 10px;
+}
+.encuestas iframe
+{
+  float:left;
+  min-height:400px;
+}
+
+.encuestas
+{
+  width:900px;
+  height: auto;
+  margin: auto;
+  margin-top: 10px;
+}
+.tagboard
+{
+  width: 800px;
+  height: 200px;
+  margin: auto;
+  margin-top: 10px;
+}
+
+.encuestasContainer
+{
+  width: 800px;
+  height: 200px;
+  margin: auto;
+  margin-top: 10px;
+}
+
+.encuestasIframe
+{
+  border:0;
+  overflow: hidden;
+  width:930px;
+  height: 370px;
+  margin: auto;
+}
+
+.locker
+{
+  position: fixed;
+  width: 100%;
+  height: 100%;
+  background: rgba(0,0,0,0.8);
+  display: none;
+  line-height: 600px;
+  text-align:center;
+  font-size: 60px;
+  color:#CCC;
+}
