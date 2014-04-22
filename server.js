@@ -15,5 +15,7 @@ app.get('/player_forecast/:forecast_id', forecast.getPlayerForecast);
 app.put('/player_forecast/:forecast_id', forecast.updatePlayerForecast);
 app.delete('/player_forecast/:forecast_id', forecast.deletePlayerForecast);
 
-app.listen(3000);
-console.log('Listening on port 3000...');
+var port = Number(process.env.PORT || 3000);
+app.listen(port, function() {
+  console.log("Listening on " + port);
+});
