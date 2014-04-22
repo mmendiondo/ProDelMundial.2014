@@ -66,9 +66,34 @@
           url: "/player_forecasts",
           success: function (forecasts) {
             for(var i in forecasts)
-              appendFriend(forecasts[i], response.data);
+              appendFriend(forecasts[i], response);
           }
         });
+      }
+
+      function appendFriend(forecast, friends)
+      {
+         console.log(friends);
+          console.log(forecast);
+
+      for(var friend in friends)
+      {
+        if(forecast.forecast_id == friends[friend].id)
+          {
+           var divo = $("<div>").addClass("friend").appendTo($("#friends"));
+            $("<div>").appendTo(divo)
+            .addClass("groupTit")
+            .text(friends[friend].name);
+
+            $("<div>").appendTo(divo)
+            .addClass("scoreFriend")
+            .text((forecast.score)? forecasts.score : "0" + " Puntos");
+
+            $("<img>").appendTo(divo)
+            .addClass("imgUser")
+            .prop("src", "https://graph.facebook.com/"+friends[friend].id+"/picture?type=small" );
+          }
+        }
       }
 
       var myForecast = [];
@@ -197,35 +222,7 @@
         .addClass("team")
         .text(match.team_name2);
     }
-        
-    function appendFriend(forecast, friends)
-    {
-         console.log(friends);
-          console.log(forecast);
-
-      for(var friend in friends)
-      {
-
-
-        if(forecast.forecast_id == friends[friend].id)
-        {
-
-           var divo = $("<div>").addClass("friend").appendTo($("#friends"));
-          $("<div>").appendTo(divo)
-          .addClass("groupTit")
-          .text(friends[friend].name);
-
-          $("<div>").appendTo(divo)
-          .addClass("scoreFriend")
-          .text((forecast.score)? forecasts.score : "0" + " Puntos");
-
-          $("<img>").appendTo(divo)
-          .addClass("imgUser")
-          .prop("src", "https://graph.facebook.com/"+friends[friend].id+"/picture?type=small" );
-        }
-      }
-    }
-
+    
     $(document).ready(function(){
       $(".save").click(function()
         {
