@@ -5,7 +5,12 @@ var Server = mongo.Server,
     Db = mongo.Db,
     BSON = mongo.BSONPure;
  
-var server = new Server('localhost', 27017, {auto_reconnect: true});
+
+  //mongodb://heroku_app24286766:mc4kflpqnb8dd20di1052fopup@ds053838.mongolab.com:53838/heroku_app24286766
+
+
+
+var server = new Server('ds053838.mongolab.com', 53838, {auto_reconnect: true});
 db = new Db('forecastdb', server, {w:1});
 
 db.open(function(err, db) {
@@ -13,8 +18,10 @@ db.open(function(err, db) {
      });
         db.collection('player_forecast', {strict:true}, function(err, collection) {
      });
-
 });
+
+
+
 
 exports.startUp = function(req, res)
 {
