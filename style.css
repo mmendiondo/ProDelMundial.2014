@@ -126,6 +126,7 @@ div:hover
 #notFriends
 {
   width: 100%;
+  height: 180px;
 }
 
 .notFriend
@@ -139,6 +140,7 @@ div:hover
 #friends
 {
   width: 100%;
+  height: 180px;
 }
 
 .friend
