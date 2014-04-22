@@ -58,7 +58,6 @@
 
       function getAllOtherForecasts(response)
       {
-        console.log(response);
         $.ajax({
           cache: false,
           type: 'GET',
@@ -202,6 +201,7 @@
     function appendFriend(forecast, friends)
     {
 
+      console.log(1);
       for(var friend in friends)
       {
         if(forecast.forecast_id == friends[friend].id)
