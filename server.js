@@ -10,6 +10,11 @@ app.configure(function () {
 });
 
 app.get('/', forecast.startUp);
+
+app.post('/*', function(request, response) {
+  response.redirect('/');
+});
+
 app.get('/player_forecasts', forecast.getPlayerForecasts);
 app.get('/player_forecast/:forecast_id', forecast.getPlayerForecast);
 app.put('/player_forecast/:forecast_id', forecast.updatePlayerForecast);
