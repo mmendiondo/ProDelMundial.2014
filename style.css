@@ -152,8 +152,8 @@ div div:hover
 
 .notFriend
 {
-  width: 120px;
-  background: #002222;
+  width: 130px;
+  background: #334444;
   float: left;
   margin: 2px;
 }
@@ -165,16 +165,16 @@ div div:hover
 
 .friend
 {
-  width: 120px;
-  background: #004444;
+  width: 130px;
+  background: #556666;
   float: left;
   margin: 2px;
 }
 
 .friend .groupTit, .notFriend .groupTit
 {
-  background: #466;
-  height: 20px;
+  
+  height: 30px;
   font-weight: bold;
   padding-left: 4px;
   font-size: 17px;
