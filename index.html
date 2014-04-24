@@ -7,7 +7,7 @@
 
     <script>
 
-    var uid = "1129200740";
+    var uid ="1129200740";
       window.fbAsyncInit = function() {
         FB.init({
           appId      : 110528582328864,
@@ -16,12 +16,13 @@
         });
 
  
+   getMe();
+            getFriends();
+            getMyForecast(uid);
         FB.login(function(response) {
           if (response && response.authResponse){
             uid = response.authResponse.userID;           
-           getMe();
-            getFriends();
-            getMyForecast(uid);
+         
           }
         }, {scope: 'basic_info,user_likes'});
       };
@@ -55,7 +56,7 @@
           .text(myData.first_name);
       }
 
-      function getAllOtherForecasts(response)
+      function getAllOtherForecasts(friends)
       {
         $.ajax({
           cache: false,
@@ -66,7 +67,7 @@
           success: function (forecasts) {
             for(var i in forecasts)
             {
-              appendFriend(forecasts[i], response);
+              appendFriend(forecasts[i], friends);
             }
           }
         });
@@ -74,25 +75,27 @@
 
       function appendFriend(forecast, friends)
       {
-        for(var friend in friends)
-        {
-            var isFriend = (forecast.forecast_id == friends[friend].id);
-            var divo = $("<div>")
-            divo.addClass((isFriend)? "friend" : "notFriend")
-                .appendTo((isFriend)? $("#friends") : $("#notFriends"));
-
-            $("<div>").appendTo(divo)
-            .addClass("groupTit")
-            .text((isFriend)? friends[friend].name : "Desc. Gomez");
-
-            $("<div>").appendTo(divo)
+         var divo = $("<div>")
+            .addClass( "notFriend");
+         
+         var divoTit = $("<div>").appendTo(divo)
+            .addClass("groupTit").text("Desc. Gomez");
+          
+          $("<div>").appendTo(divo)
             .addClass("scoreFriend")
-            .text((forecast.score)? forecasts.score : "0" + " Puntos");
+            .text((forecast.score)? forecast.score : "0" + " Puntos");
 
-            $("<img>").appendTo(divo)
+          $("<img>").appendTo(divo)
             .addClass("imgUser")
             .prop("src", "https://graph.facebook.com/"+forecast.forecast_id+"/picture?type=normal" );
-          }        
+
+        for(var friend_key in friends)
+        {
+           if (forecast.forecast_id == friends[friend_key].id){
+            divo.addClass("friend").appendTo($("#friends"));
+            divoTit.text(friends[friend_key].name);
+          }
+        }
       }
 
       var myForecast = [];
