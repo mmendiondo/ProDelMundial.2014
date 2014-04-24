@@ -7,7 +7,7 @@
 
     <script>
 
-    var uid = "1129200740";
+    var uid;
       window.fbAsyncInit = function() {
         FB.init({
           appId      : 110528582328864,
@@ -15,9 +15,11 @@
           xfbml      : true
         });
 
+
         FB.login(function(response) {
           if (response && response.authResponse){
             uid = response.authResponse.userID;
+           
             getMe();
             getFriends();
             getMyForecast(uid);
@@ -184,7 +186,7 @@
       .blur(function()
         {
           if(new Date(match.play_at) > today())
-            match.playerScore1 = this.innerText;
+            match.playerScore1 = $(this).text();
         })
       .keydown(function( e ) {
           preventNotNumber(e, match.play_a);        
@@ -201,7 +203,7 @@
         .blur(function()
           {
             if(new Date(match.play_at) > today()) 
-              match.playerScore2 = this.innerText;
+              match.playerScore2 = $(this).text();
           })
         .keydown(function( e ) 
           {
@@ -248,8 +250,8 @@ function preventNotNumber(e)
 
 function limitCharacters(elem, number)
 {
-     if(elem.innerText.length > number)
-      elem.innerText = elem.innerText.substring(0, number);
+     if($(elem).text().length > number)
+      $(elem).text($(elem).text().substring(0, number));
 }
 
   </script>
@@ -257,7 +259,7 @@ function limitCharacters(elem, number)
   </head>
 	<body>
 
-    <div class="locker">Cargando...XD</div>
+    <div class="locker">Cargando... ¬¬  buuuu</div>
     <div class="title">ProDelMundial</div>
     <div id='dashboard'></div>
     <div class="fb-like" data-send="true" data-width="450" data-show-faces="true"></div>

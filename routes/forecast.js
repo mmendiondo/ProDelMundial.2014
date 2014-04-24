@@ -75,8 +75,6 @@ exports.updatePlayerForecast = function(req, res) {
   var forecasts_id = req.params.forecast_id;
     var forecasts = req.body;
 
-    console.log(forecasts_id, forecasts)
-
     db.collection('player_forecasts', function(err, collection) {
         collection.update({forecast_id: forecasts_id}, {forecast_id: forecasts_id, forecast:forecasts.forecast}, {upsert:true, w: 1}, function(err, result) {
             res.send(result);

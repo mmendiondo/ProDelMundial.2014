@@ -1,16 +1,30 @@
+@font-face
+{
+  font-family: "fuente";
+  src: url(Web_Serveroff.otf);
+}
+
+@font-face
+{
+  font-family: "fuente";
+  src: url(Web_Serveroff-bold.otf);
+  font-weight: bold;
+}
+
 body{
-      font-family:arial;
-      color:#333;
-      font-size:11px;
-      background: #EEE;
-    }
+      font-family:"fuente","Helvetica Neue", Helvetica, Arial, sans-serif;
+      color:#444;
+      font-size:16px;
+      background: #DEE;
+      
+}
 div
 {
-  border-radius: 4px;
+  
 }
-div:hover
+div div:hover
 {
-  border-color:#006C51;
+  box-shadow: 0px 0px 200px  rgba(255,255,255, .5) inset;
 }
 
 .group, .match, .score, .team, .img24x24{
@@ -19,40 +33,43 @@ div:hover
     }
 
 .groupTit{
-      background: #455 ;
-      height:20px;
-      line-height:20px;
-      color: #FFF;
+      font-family:"fuente"; 
+       text-shadow: -1px -1px #abb; 
+      height:30px;
+      line-height:30px;
       font-weight: bold;
       padding-left: 4px;
+      font-size: 16px;
+       background: #9AA;
     }
 .group{
-      width:242px;
-      border:solid 2px #455 ;
+      width:244px;     
       margin:1px;
       -webkit-transition: height 1s; /* For Safari 3.1 to 6.0 */
       transition: height 1s;
-      height:200px;
-      background: #688 ;
-      color:#FFF;
+      height:210px;
+       background: #BCC;
+      
 
     }
 .match{
-      width:55px;
+      width:50px;
       height:30px;
       line-height:30px;
-      color:#DDD;
+      padding-left: 4px;
+     
+      font-size: 12px;
     }
 .score{
       width:20px;
       height:22px;
       line-height: 20px;
       margin-top:2px;
-      background:#DDD;
-      border:solid 1px white;
+      background:#DEE;
+     
       text-align: center;
       margin-right:1px;
-      color: #222;
+      
     }
 .img24x24
     {
@@ -60,7 +77,7 @@ div:hover
       top: 2px;
     }
 .team{
-      width:45px;
+      width:50px;
       overflow:hidden;
       height:30px;
       line-height:30px;
@@ -68,15 +85,16 @@ div:hover
     }
 #world
 {  
-  margin:auto;
+  margin: 10px auto;
   width: 992px;
-  margin-bottom: 10px;
   cursor:pointer;
+  overflow: hidden;
 }
 #dashboard, .title
 {
   font-size: 60px;
-  color:#666;
+  font-family:"fuente"; 
+  text-shadow: -1px -1px #EFF; 
   font-weight: bold;
   text-align: right;
   margin-right: 150px;
@@ -89,10 +107,10 @@ div:hover
 .title
 {
   text-align: left;
+  
 }
 .group:nth-child(9),.group:nth-child(10), .group:nth-child(11), .group:nth-child(12), .group:nth-child(13)
 {
-  float: none;
   width: 986px;
   margin: auto;
   text-align: center;
@@ -103,36 +121,39 @@ div:hover
 
 .myData{float:left;height:100px;}
 .save{
-      width:75px;
-      overflow:hidden;
-      height:30px;
-      line-height:30px;
-      text-align: center;
-      background:orange;
-      margin:auto;
-      cursor:pointer;
-      display: none;
+     width: 75px;
+    overflow: hidden;
+    height: 50px;
+    line-height: 50px;
+    text-align: center;
+    background: orange;
+    margin: auto;
+    cursor: pointer;
+    display: none;
+    overflow: hidden;
+    width: 200px;
+    font-weight: bold;
+    font-size: 20px;
     }
 .save:hover
 {
-   background:#DDD;
+   background:#c0392b;
 }
 
 .collapse
 {
-  height:20px;
+  height:30px;
 }
 
 #notFriends
 {
   width: 100%;
-  height: 180px;
 }
 
 .notFriend
 {
   width: 120px;
-  background: #001111;
+  background: #002222;
   float: left;
   margin: 2px;
 }
@@ -140,22 +161,20 @@ div:hover
 #friends
 {
   width: 100%;
-  height: 180px;
 }
 
 .friend
 {
   width: 120px;
-  background: #003333;
+  background: #004444;
   float: left;
   margin: 2px;
 }
 
 .friend .groupTit, .notFriend .groupTit
 {
-  background: #455;
+  background: #466;
   height: 20px;
-  color: #FFF;
   font-weight: bold;
   padding-left: 4px;
   font-size: 17px;
@@ -168,7 +187,6 @@ div:hover
 {
   font-size: 19px;
   font-weight: bold;
-  color: #5599A4;
   padding: 0px 10px;
   margin-bottom: -5px;
   margin-top: 5px;
@@ -193,7 +211,7 @@ div:hover
 .tagboard
 {
   width: 800px;
-  height: 200px;
+  overflow: hidden;
   margin: auto;
   margin-top: 10px;
 }
@@ -217,13 +235,14 @@ div:hover
 
 .locker
 {
+  z-index:99;
   position: fixed;
   width: 100%;
   height: 100%;
   background: rgba(0,0,0,0.8);
   display: none;
-  line-height: 600px;
+  line-height: 400px;
   text-align:center;
   font-size: 60px;
-  color:#CCC;
+  margin: auto;
 }
