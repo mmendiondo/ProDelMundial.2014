@@ -152,7 +152,7 @@ div div:hover
   width: 100%;
   padding: 5px 0;
   margin: 5px 0;
-  background-color: #667777;
+  background-color: #223333;
 }
 
 .notFriend
@@ -168,7 +168,7 @@ div div:hover
 {
   display: none;
   width: 100%;
-  min-height: 190px;
+  min-height: 200px;
   padding: 5px 0;
   margin: 5px 0;
   background-color: #889999;
