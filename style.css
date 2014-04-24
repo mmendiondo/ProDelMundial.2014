@@ -111,7 +111,7 @@ div div:hover
 }
 .group:nth-child(9),.group:nth-child(10), .group:nth-child(11), .group:nth-child(12), .group:nth-child(13)
 {
-  width: 986px;
+  width: 984px;
   margin: auto;
   text-align: center;
 }
@@ -147,28 +147,40 @@ div div:hover
 
 #notFriends
 {
+  display: none;
+  min-height: 200px;
   width: 100%;
+  padding: 5px 0;
+  margin: 5px 0;
+  background-color: #667777;
 }
 
 .notFriend
 {
+  min-height: 195px;
   width: 130px;
   background: #334444;
   float: left;
-  margin: 2px;
+   margin: 2px 7px;
 }
 
 #friends
 {
+  display: none;
   width: 100%;
+  min-height: 190px;
+  padding: 5px 0;
+  margin: 5px 0;
+  background-color: #889999;
 }
 
 .friend
 {
+  min-height: 195px;
   width: 130px;
   background: #556666;
   float: left;
-  margin: 2px;
+  margin: 2px 7px;
 }
 
 .friend .groupTit, .notFriend .groupTit
@@ -190,6 +202,7 @@ div div:hover
   padding: 0px 10px;
   margin-bottom: -5px;
   margin-top: 5px;
+  color: #DEE;
 }
 .imgUser{
   margin: auto;

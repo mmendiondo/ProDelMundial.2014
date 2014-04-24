@@ -7,7 +7,7 @@
 
     <script>
 
-    var uid ="1129200740";
+    var uid ;
       window.fbAsyncInit = function() {
         FB.init({
           appId      : 110528582328864,
@@ -16,13 +16,13 @@
         });
 
  
-   getMe();
-            getFriends();
-            getMyForecast(uid);
+ 
         FB.login(function(response) {
           if (response && response.authResponse){
             uid = response.authResponse.userID;           
-         
+            getMe();
+            getFriends();
+            getMyForecast(uid);
           }
         }, {scope: 'basic_info,user_likes'});
       };
@@ -75,11 +75,13 @@
 
       function appendFriend(forecast, friends)
       {
-         var divo = $("<div>")
-            .addClass( "notFriend");
-         
-         var divoTit = $("<div>").appendTo(divo)
-            .addClass("groupTit").text("Desc. Gomez");
+       // if (forecast.id != uid)
+        {
+          var divo = $("<div>")
+            .addClass( "notFriend")
+            .appendTo($("#notFriends").show());
+          var divoTit = $("<div>").appendTo(divo)
+            .addClass("groupTit").text("Desconocido Gomez");
           
           $("<div>").appendTo(divo)
             .addClass("scoreFriend")
@@ -89,11 +91,12 @@
             .addClass("imgUser")
             .prop("src", "https://graph.facebook.com/"+forecast.forecast_id+"/picture?type=normal" );
 
-        for(var friend_key in friends)
-        {
-           if (forecast.forecast_id == friends[friend_key].id){
-            divo.addClass("friend").appendTo($("#friends"));
-            divoTit.text(friends[friend_key].name);
+          for(var friend_key in friends)
+          {
+             if (forecast.forecast_id == friends[friend_key].id){
+              divo.addClass("friend").appendTo($("#friends").show());
+              divoTit.text(friends[friend_key].name);
+            }
           }
         }
       }
