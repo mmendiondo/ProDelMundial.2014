@@ -207,6 +207,7 @@ div div:hover
 .imgUser{
   margin: auto;
   padding: 10px;
+  max-height: 114px;
 }
 .encuestas iframe
 {
